@@ -1,0 +1,45 @@
+/* style.css */
+
+.root-pane {
+    -fx-background-color: linear-gradient(to right, #048352, #eaf4f0);
+}
+
+.login-box {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20;
+    -fx-alignment: center;
+    -fx-spacing: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 15, 0, 2, 2);
+}
+
+.login-title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f3faf8;
+
+}
+
+.login-button {
+    -fx-background-color: #317a60;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10;
+}
+
+.login-button:hover {
+    -fx-background-color: #37e1a0;
+}
+
+.forgot-link {
+    -fx-text-fill: #0c8355;
+    -fx-font-size: 12px;
+}
+.sign-up{
+    -fx-text-fill: #0c8355;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
