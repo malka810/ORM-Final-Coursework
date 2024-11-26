@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UserBO;
 
 import java.util.Objects;
 
@@ -16,6 +18,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         AnchorPane rootNode = FXMLLoader.load(Objects.requireNonNull(this.getClass().getResource("/view/login_form.fxml")));
 
         Scene scene = new Scene(rootNode);

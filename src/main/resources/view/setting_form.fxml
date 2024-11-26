@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="567.0" prefWidth="391.0" style="-fx-background-color: #040D12; -fx-border-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SettingFormController">
+<AnchorPane prefHeight="567.0" prefWidth="391.0" style="-fx-background-color: #040D12; -fx-border-color: #ffffff;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SettingFormController">
     <children>
         <JFXTextField fx:id="txtCurrentUsername" layoutX="55.0" layoutY="109.0" prefHeight="36.0" prefWidth="285.0" promptText="current username" unFocusColor="#46a451" />
-        <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="25.0" layoutY="26.0">
-            <image>
-                <Image url="@../image/settingIcon.png" />
-            </image>
-        </ImageView>
+
         <Label layoutX="71.0" layoutY="31.0" text="Setting" textFill="WHITE">
             <font>
                 <Font size="16.0" />
@@ -50,11 +43,6 @@
         <Label fx:id="lblCurrentPassword" layoutX="57.0" layoutY="382.0" prefHeight="17.0" prefWidth="285.0" textFill="RED" />
         <Label fx:id="lblNewPassword" layoutX="57.0" layoutY="442.0" prefHeight="17.0" prefWidth="285.0" textFill="RED" />
         <Label fx:id="lblConfirmPassword" layoutX="57.0" layoutY="502.0" prefHeight="17.0" prefWidth="285.0" textFill="RED" />
-        <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="326.0" layoutY="8.0">
-            <image>
-                <Image url="@../image/closeIcon.png" />
-            </image>
-        </ImageView>
-        <JFXButton fx:id="btnClose" buttonType="RAISED" layoutX="326.0" layoutY="8.0" onAction="#closeWindowOnAction" prefHeight="30.0" prefWidth="30.0" text="." textFill="#685858" />
+        <JFXButton fx:id="btnClose" buttonType="RAISED" layoutX="326.0" layoutY="8.0" onAction="#closeWindowOnAction" prefHeight="30.0" prefWidth="50.0" text="Close" textFill="#685858" />
     </children>
 </AnchorPane>

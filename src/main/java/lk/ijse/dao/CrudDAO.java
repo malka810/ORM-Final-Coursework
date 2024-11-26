@@ -1,4 +1,6 @@
 package lk.ijse.dao;
 
-public interface CrudDAO {
+public interface CrudDAO <T> extends SuperDAO{
+    boolean save(T object);
+
 }

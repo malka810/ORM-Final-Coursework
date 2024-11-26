@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="552.0" prefWidth="663.0" styleClass="root-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginFormController">
+<AnchorPane fx:id="rootNode" prefHeight="552.0" prefWidth="663.0" styleClass="root-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoginFormController">
 
     <!-- Centering the content -->
     <children>
@@ -24,20 +24,17 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-                <TextField fx:id="usernameField" layoutX="38.0" layoutY="98.0" prefHeight="26.0" prefWidth="246.0" promptText="Enter username" stylesheets="@../css/style.css" />
+                <TextField fx:id="txtUserName" layoutX="38.0" layoutY="98.0" prefHeight="26.0" prefWidth="246.0" promptText="Enter username" stylesheets="@../css/style.css" />
                 <Label layoutX="43.0" layoutY="146.0" prefHeight="18.0" prefWidth="91.0" text="Password:">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Label>
-                <PasswordField fx:id="passwordField" layoutX="35.0" layoutY="172.0" prefHeight="26.0" prefWidth="246.0" promptText="Enter password" />
-   
-               <!-- Optional Forgot Password Link -->
-               <Hyperlink alignment="CENTER" layoutX="37.0" layoutY="221.0" onAction="#handleForgotPasswordAction" styleClass="forgot-link" stylesheets="@../css/style.css" text="Forgot Password?" />
+                <PasswordField fx:id="txtPassword" layoutX="35.0" layoutY="172.0" prefHeight="26.0" prefWidth="246.0" promptText="Enter password" />
    
                <!-- Login Button -->
-               <Button layoutX="105.0" layoutY="259.0" onAction="#handleLoginAction" prefHeight="36.0" prefWidth="105.0" styleClass="login-button" stylesheets="@../css/style.css" text="Login" />
-            <Label layoutX="36.0" layoutY="322.0" text="Create an account ?" />
-            <Hyperlink alignment="CENTER" layoutX="147.0" layoutY="318.0" onAction="#handleSignUpAction" styleClass="sign-up" stylesheets="@../css/style.css" text="Sign up" />
+               <Button layoutX="89.0" layoutY="249.0" onAction="#btnLoginOnAction" prefHeight="36.0" prefWidth="105.0" styleClass="login-button" stylesheets="@../css/style.css" text="Login" />
+            <Label layoutX="53.0" layoutY="313.0" text="Create an account ?" />
+            <Hyperlink alignment="CENTER" layoutX="161.0" layoutY="309.0" onAction="#handleSignUpOnAction" styleClass="sign-up" stylesheets="@../css/style.css" text="Sign up" />
          </children>
       </AnchorPane>
       <ImageView fitHeight="551.0" fitWidth="301.0" layoutX="423.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
