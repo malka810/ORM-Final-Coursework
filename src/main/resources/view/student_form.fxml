@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.StudentForm"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="675.0" prefWidth="780.0" styleClass="pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.StudentFormController">
+    <children>
+        <Label layoutX="30.0" layoutY="59.0" prefHeight="34.0" prefWidth="98.0" styleClass="font" stylesheets="@../css/style.css" text="Student ID:" textFill="WHITE" AnchorPane.leftAnchor="80.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="77.0" layoutY="134.0" prefHeight="34.0" prefWidth="124.0" styleClass="font" stylesheets="@../css/style.css" text="Student Name :" textFill="WHITE" AnchorPane.rightAnchor="579.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtName" layoutX="77.0" layoutY="167.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="26.0" prefWidth="202.0" stylesheets="@../css/style.css" AnchorPane.rightAnchor="501.0" />
+        <TextField fx:id="txtAddress" layoutX="77.0" layoutY="258.0" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="13.0" prefWidth="202.0" stylesheets="@../css/style.css" AnchorPane.leftAnchor="77.0" />
+        <Label layoutX="428.0" layoutY="134.0" prefHeight="34.0" prefWidth="136.0" styleClass="font" stylesheets="@../css/style.css" text="Phone number :" textFill="WHITE" AnchorPane.rightAnchor="216.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtContact" layoutX="428.0" layoutY="167.0" onKeyReleased="#txtContactOnKeyReleased" prefHeight="26.0" prefWidth="202.0" stylesheets="@../css/style.css" AnchorPane.rightAnchor="149.60000000000002" />
+        <Label layoutX="435.0" layoutY="59.0" prefHeight="34.0" prefWidth="102.0" styleClass="font" stylesheets="@../css/style.css" text="Student Email :" textFill="WHITE" AnchorPane.leftAnchor="435.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtEmail" layoutX="428.0" layoutY="93.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="26.0" prefWidth="202.0" stylesheets="@../css/style.css" AnchorPane.leftAnchor="428.0" />
+          <Button layoutX="253.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="42.0" prefWidth="98.0" stylesheets="@../css/style.css" text="Update" textFill="#232121">
+              <font>
+                  <Font name="System Bold" size="16.0" />
+              </font>
+          </Button>
+          <Button layoutX="370.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="102.0" stylesheets="@../css/style.css" text="Delete " textFill="#1e1b1b">
+              <font>
+                  <Font name="System Bold" size="16.0" />
+              </font>
+          </Button>
+      <Button layoutX="127.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="42.0" prefWidth="102.0" stylesheets="@../css/style.css" text="Save" textFill="#1e1919">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="489.0" layoutY="357.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="42.0" prefWidth="102.0" stylesheets="@../css/style.css" text="Clear" textFill="#201d1d">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtStudentID" layoutX="77.0" layoutY="93.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="26.0" prefWidth="202.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" />
+      <Label layoutX="302.0" layoutY="14.0" prefHeight="42.0" prefWidth="136.0" text="Student" textFill="#f0eded">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font>
+      </Label>
+      <Label layoutX="77.0" layoutY="214.0" prefHeight="34.0" prefWidth="90.0" styleClass="font" stylesheets="@../css/style.css" text="Address :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="428.0" layoutY="207.0" prefHeight="34.0" prefWidth="78.0" styleClass="font" stylesheets="@../css/style.css" text="User Id :" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cmbUserId" layoutX="421.0" layoutY="257.0" onAction="#cmbUserIdOnAction" prefHeight="26.0" prefWidth="202.0" />
+      <TableView fx:id="tblStudent" layoutX="49.0" layoutY="431.0" prefHeight="200.0" prefWidth="681.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="123.1999740600586" text="Name" />
+            <TableColumn fx:id="colSEmail" prefWidth="127.20001220703125" text="Email" />
+            <TableColumn fx:id="colAddress" prefWidth="110.40008544921875" text="Address" />
+            <TableColumn fx:id="colTel" prefWidth="127.99996948242188" text="Phone number" />
+            <TableColumn fx:id="colUId" prefWidth="119.20001220703125" text="User-Id" />
+        </columns>
+      </TableView>
+    </children>
 </AnchorPane>

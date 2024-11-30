@@ -1,123 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootNode" prefHeight="700.0" prefWidth="921.0" style="-fx-background-color: #C7C8CC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.RegistrationFormController">
+<AnchorPane fx:id="registrPane" prefHeight="675.0" prefWidth="780.0" styleClass="pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.RegistrationFormController">
     <children>
-        <Label layoutX="387.0" layoutY="1.0" prefHeight="58.0" prefWidth="342.0" styleClass="font" stylesheets="@../css/style.css" text="REGISTRATION" AnchorPane.leftAnchor="387.0" AnchorPane.rightAnchor="421.0">
+        <Text layoutX="75.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0">
             <font>
-                <Font name="System Bold" size="28.0" />
+                <Font name="System Bold" size="35.0" />
             </font>
-        </Label>
-        <Label layoutX="30.0" layoutY="59.0" prefHeight="34.0" prefWidth="187.0" styleClass="font" stylesheets="@../css/style.css" text="Registration ID:" AnchorPane.leftAnchor="80.0">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblRegisterId" layoutX="83.0" layoutY="88.0" prefHeight="15.0" prefWidth="399.0" styleClass="font" stylesheets="@../css/style.css" text="R-1" AnchorPane.leftAnchor="83.0">
-            <font>
-                <Font name="System Bold" size="18.0" />
-            </font>
-        </Label>
-        <Label layoutX="659.0" layoutY="59.0" prefHeight="34.0" prefWidth="173.0" styleClass="font" stylesheets="@../css/style.css" text="Date:" AnchorPane.rightAnchor="318.0">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Label layoutX="80.0" layoutY="157.0" prefHeight="34.0" prefWidth="202.0" styleClass="font" stylesheets="@../css/style.css" text="Student ID:" AnchorPane.leftAnchor="80.0">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtStudentId" layoutX="80.0" layoutY="185.0" onAction="#txtStudentIdOnAction" onKeyReleased="#txtStudentIdOnKeyReleased" prefHeight="27.0" prefWidth="292.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" AnchorPane.leftAnchor="80.0" />
-        <Label layoutX="660.0" layoutY="157.0" prefHeight="34.0" prefWidth="202.0" styleClass="font" stylesheets="@../css/style.css" text="Student Name:" AnchorPane.rightAnchor="288.0">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtStudentName" layoutX="660.0" layoutY="186.0" prefHeight="27.0" prefWidth="292.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" AnchorPane.rightAnchor="198.0" />
-        <TableView fx:id="tblRegistration" layoutX="74.0" layoutY="412.0" prefHeight="198.0" prefWidth="970.0" stylesheets="@../css/style.css" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="106.79999999999995">
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.2395833333333334">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.24210526049137115" green="0.19368420541286469" blue="0.19368420541286469" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="tbl_registr" layoutX="37.0" layoutY="472.0" prefHeight="168.0" prefWidth="706.0" style="-fx-border-radius: 15;">
             <columns>
-                <TableColumn fx:id="colId" prefWidth="149.59998166561127" text="ID" />
-                <TableColumn fx:id="colProgramName" prefWidth="266.4000244140625" text="PROGRAM NAME" />
-                <TableColumn fx:id="colFee" prefWidth="191.19998168945312" text="FEE" />
-                <TableColumn fx:id="colUpfrontPayment" prefWidth="256.800048828125" text="Prepayment" />
+                <TableColumn fx:id="colReId" prefWidth="130.3999900817871" text="Registr ID" />
+                <TableColumn fx:id="colSId" prefWidth="98.39996337890625" text="Student Name" />
+                <TableColumn fx:id="colPId" prefWidth="156.0" text="Program Name" />
+                <TableColumn fx:id="colReDate" prefWidth="87.20001220703125" text="Date" />
+            <TableColumn fx:id="colFee" prefWidth="107.20004272460938" text="Fee" />
+                <TableColumn fx:id="colPrepayment" prefWidth="126.39996337890625" text="Prepayment" />
             </columns>
         </TableView>
-        <DatePicker fx:id="datePicker" layoutX="944.0" layoutY="89.0" onAction="#getDateOnAction" prefHeight="25.0" prefWidth="52.0" />
-        <Label layoutX="80.0" layoutY="129.0" prefHeight="34.0" prefWidth="187.0" styleClass="font" stylesheets="@../css/style.css" text="student details">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Line endX="866.0" layoutX="177.0" layoutY="123.0" startX="-100.0" />
-        <Button layoutX="808.0" layoutY="629.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="42.0" prefWidth="143.0" styleClass="radius" stylesheets="@../css/style.css" text="Register">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-        <Label layoutX="80.0" layoutY="260.0" prefHeight="34.0" prefWidth="176.0" styleClass="font" stylesheets="@../css/style.css" text="Program Name:">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Label layoutX="80.0" layoutY="230.0" prefHeight="34.0" prefWidth="187.0" styleClass="font" stylesheets="@../css/style.css" text="program details">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Line endX="866.0" layoutX="180.0" layoutY="237.0" startX="-100.0" />
-        <ComboBox fx:id="cmbProgramNames" layoutX="80.0" layoutY="294.0" onAction="#cmbProgramNamesOnAction" prefHeight="27.0" prefWidth="258.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" />
-        <Label layoutX="450.0" layoutY="260.0" prefHeight="34.0" prefWidth="176.0" styleClass="font" stylesheets="@../css/style.css" text="Program ID:">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtProgramId" layoutX="452.0" layoutY="290.0" prefHeight="27.0" prefWidth="350.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" />
-        <Label layoutX="80.0" layoutY="320.0" prefHeight="34.0" prefWidth="176.0" styleClass="font" stylesheets="@../css/style.css" text="Program Fee:">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <Label fx:id="lblProgrameFee" layoutX="81.0" layoutY="347.0" prefHeight="27.0" prefWidth="258.0" styleClass="font" stylesheets="@../css/style.css" text="0/=">
+        <Button layoutX="109.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="89.0" text="Save">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
-        </Label>
-        <Label layoutX="451.0" layoutY="317.0" prefHeight="34.0" prefWidth="176.0" styleClass="font" stylesheets="@../css/style.css" text="Prepayment">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Label>
-        <TextField fx:id="txtPrePayment" layoutX="450.0" layoutY="345.0" onKeyReleased="#txtPaymentOnKeyReleased" prefHeight="27.0" prefWidth="350.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" />
-        <Button layoutX="76.0" layoutY="18.0" mnemonicParsing="false" onAction="#btnViewRegisOnAction" prefHeight="34.0" prefWidth="187.0" stylesheets="@../css/style.css" text="View Registration">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-            <styleClass>
-                <String fx:value="radius" />
-                <String fx:value="button" />
-            </styleClass>
         </Button>
-        <TextField fx:id="txtDate" layoutX="559.0" layoutY="88.0" prefHeight="27.0" prefWidth="292.0" styleClass="blue-box-text-field" stylesheets="@../css/style.css" />
-        <Button layoutX="714.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnPaymentOnAction" prefHeight="34.0" prefWidth="187.0" stylesheets="@../css/style.css" text="Payment Form">
+        <Button layoutX="207.0" layoutY="405.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="90.0" text="Update">
             <font>
-                <Font name="System Bold" size="16.0" />
+                <Font name="System Bold" size="18.0" />
             </font>
-            <styleClass>
-                <String fx:value="radius" />
-                <String fx:value="button" />
-            </styleClass>
         </Button>
+        <Button layoutX="312.0" layoutY="404.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="42.0" prefWidth="98.0" text="Delete">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="421.0" layoutY="402.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="42.0" prefWidth="109.0" text="Clear">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Text layoutX="293.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register" wrappingWidth="193.01443481445312">
+            <font>
+                <Font name="System Bold" size="45.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="0.7954545599041563" endY="1.0" startX="0.11837123379562853" startY="0.6590909226374193">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.9263157844543457" green="0.8817154169082642" blue="0.9233424067497253" opacity="0.49000000953674316" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+          <Text fill="WHITE" layoutX="51.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register ID :">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <TextField fx:id="txtRegisId" layoutX="35.0" layoutY="147.0" prefHeight="32.0" prefWidth="261.0" promptText="Registr id :">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+          <ComboBox fx:id="cmbStudentId" layoutX="34.0" layoutY="220.0" onAction="#cmbStudentOnAction" prefHeight="32.0" prefWidth="262.0" promptText="Student ID:" />
+          <Text fill="WHITE" layoutX="54.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID:">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <TextField fx:id="txtPrepayment" layoutX="431.0" layoutY="249.0" prefHeight="32.0" prefWidth="326.0" promptText="Registr Fee:">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+          <Text fill="WHITE" layoutX="431.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prepayment :">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <Text fill="WHITE" layoutX="431.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registr Date :">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <DatePicker fx:id="txtReDate" layoutX="421.0" layoutY="163.0" prefHeight="32.0" prefWidth="326.0" promptText="Registr Date :" />
+          <ComboBox fx:id="cmbProgramId" layoutX="35.0" layoutY="348.0" onAction="#cmbProgramIdOnAction" prefHeight="32.0" prefWidth="262.0" promptText="Program ID:" />
+          <Text fill="WHITE" layoutX="35.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID:">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+      <Polygon fill="#1cd997c0" layoutX="109.0" layoutY="61.0" opacity="0.42" points="445.4000244140625, -60.000003814697266, 28.800018310546875, 18.400009155273438, -108.99999237060547, -61.000003814697266" stroke="#287b3a" strokeType="INSIDE" />
+      <Text fill="WHITE" layoutX="432.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Name :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtProgramName" layoutX="432.0" layoutY="314.0" prefHeight="32.0" prefWidth="261.0" promptText="Program name  :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="46.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtStudentName" layoutX="35.0" layoutY="285.0" prefHeight="32.0" prefWidth="261.0" promptText="Student name  :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Text fill="WHITE" layoutX="422.0" layoutY="385.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Fee :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtFee" layoutX="531.0" layoutY="364.0" prefHeight="32.0" prefWidth="154.0" promptText="Program Fee  :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
     </children>
 </AnchorPane>

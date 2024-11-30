@@ -4,64 +4,33 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
-import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "students")
 public class Student {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID studentId;  // Use UUID for unique identifier
-    private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
-    private String email;
-    private String phoneNumber;
-    private String address;
-    @Enumerated(EnumType.STRING)
-    private Gender gender;  // Enum for gender
-    @Column(name = "registration_date")
-    private Date registrationDate;
-    @Enumerated(EnumType.STRING)
-    private Status status;  // Enum for student status
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", updatable = false)
-    private Date createdAt;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Date updatedAt;
+    private String studentId;
     @ManyToOne
-    private User user; // Reference to User entity
+    @JoinColumn(name = "user_Id")
+    private User user;
+    private String name;
+    private String address;
+    private String email;
+    private String contact;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Registration> registrations = new ArrayList<>();  // One-to-Many relationship
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Registration> registrations;
 
-
-    // Enum for gender
-    public enum Gender {
-        MALE, FEMALE, OTHER
-    }
-
-    // Enum for student status
-    public enum Status {
-        ACTIVE, GRADUATED, INACTIVE
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date();
-        updatedAt = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = new Date();
+    public Student(String studentId, User user, String name, String address, String email, String contact) {
+        this.studentId = studentId;
+        this.user = user;
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.contact = contact;
     }
 }

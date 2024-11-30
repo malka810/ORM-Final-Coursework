@@ -31,6 +31,52 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public boolean delete(String object) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+
+            // Retrieve the user object first
+            User user = session.get(User.class, object);
+            if (user != null) {
+                session.delete(user); // Delete the user object
+                transaction.commit();
+                return true; // Return true if deletion is successful
+            } else {
+                System.out.println("User not found with ID: " + object);
+                return false; // Return false if no user was found
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback(); // Rollback in case of an error
+            }
+            e.printStackTrace(); // Log the exception for debugging
+            return false; // Return false if the deletion fails
+        } finally {
+            session.close(); // Ensure the session is closed in all cases
+        }
+    }
+
+    @Override
+    public User searchUserId(String userId) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("from User where userId =?1");
+        query.setParameter(1, userId);
+        User user = (User) query.uniqueResult();
+        transaction.commit();
+        return user;
+    }
+
+    @Override
+    public boolean update(Object object) {
+        return false;
+    }
+
+    @Override
     public String getCurrentId() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = null;
@@ -57,7 +103,7 @@ public class UserDAOImpl implements UserDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        NativeQuery query = session.createNativeQuery("SELECT * FROM user");
+        NativeQuery query = session.createNativeQuery("SELECT * FROM User");
         query.addEntity(User.class);
         List<User> resultList = query.getResultList();
         transaction.commit();
@@ -122,4 +168,55 @@ public class UserDAOImpl implements UserDAO {
 
         return isValid;
     }
-}
+
+    @Override
+    public boolean update(User user) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = null;
+
+        try {
+            transaction = session.beginTransaction();
+            session.update(user);
+            transaction.commit();
+            return true; // Return true if the update is successful
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback(); // Rollback the transaction in case of an error
+            }
+            e.printStackTrace(); // Log the exception for debugging
+            return false; // Return false if the update fails
+        } finally {
+            session.close(); // Ensure the session is closed in all cases
+        }
+    }
+
+//    @Override
+//    public boolean delete(String userId) {
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//        Transaction transaction = null;
+//
+//        try {
+//            transaction = session.beginTransaction();
+//
+//            // Retrieve the user object first
+//            User user = session.get(User.class, userId);
+//            if (user != null) {
+//                session.delete(user); // Delete the user object
+//                transaction.commit();
+//                return true; // Return true if deletion is successful
+//            } else {
+//                System.out.println("User not found with ID: " + userId);
+//                return false; // Return false if no user was found
+//            }
+//        } catch (Exception e) {
+//            if (transaction != null) {
+//                transaction.rollback(); // Rollback in case of an error
+//            }
+//            e.printStackTrace(); // Log the exception for debugging
+//            return false; // Return false if the deletion fails
+//        } finally {
+//            session.close(); // Ensure the session is closed in all cases
+//        }
+//    }
+    }
+

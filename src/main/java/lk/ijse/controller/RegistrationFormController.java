@@ -1,101 +1,314 @@
 package lk.ijse.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.ProgramBO;
+import lk.ijse.bo.custom.RegistrationBO;
+import lk.ijse.bo.custom.StudentBO;
+import lk.ijse.dto.ProgramDTO;
+import lk.ijse.dto.RegistrationDTO;
+import lk.ijse.dto.StudentDTO;
+import lk.ijse.entity.Program;
+import lk.ijse.entity.Student;
+import lk.ijse.tm.RegistrationTm;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 public class RegistrationFormController {
 
-    @FXML
-    private ComboBox<?> cmbProgramNames;
 
     @FXML
-    private TableColumn<?, ?> colFee;
+    public TextField txtStudentName;
+    @FXML
+    public TextField txtProgramName;
+    @FXML
+    public TextField txtFee;
+    @FXML
+    public TableColumn colFee;
+    @FXML
+    private ComboBox<String> cmbProgramId;
 
     @FXML
-    private TableColumn<?, ?> colId;
+    private ComboBox<String> cmbStudentId;
 
     @FXML
-    private TableColumn<?, ?> colProgramName;
+    private TableColumn<?, ?> colPId;
 
     @FXML
-    private TableColumn<?, ?> colUpfrontPayment;
+    private TableColumn<?, ?> colPrepayment;
 
     @FXML
-    private DatePicker datePicker;
+    private TableColumn<?, ?> colReDate;
 
     @FXML
-    private Label lblProgrameFee;
+    private TableColumn<?, ?> colReId;
 
     @FXML
-    private Label lblRegisterId;
+    private TableColumn<?, ?> colSId;
 
     @FXML
-    private AnchorPane rootNode;
+    private AnchorPane registrPane;
 
     @FXML
-    private TableView<?> tblRegistration;
+    private TableView<RegistrationTm> tbl_registr;
 
     @FXML
-    private TextField txtDate;
+    private TextField txtPrepayment;
 
     @FXML
-    private TextField txtPrePayment;
+    private DatePicker txtReDate;
 
     @FXML
-    private TextField txtProgramId;
+    private TextField txtRegisId;
+
+
+    RegistrationBO registrationBO = (RegistrationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.Registration);
+    StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.Student);
+    ProgramBO programBO = (ProgramBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.Programs);
+
+    public  void initialize() {
+        getStudentIds();
+        gerProgramIds();
+        setDate();
+        getCurrentRegisterId();
+        setCellValueFactory();
+        loadAllRegistrations();
+        setTableSelection();
+
+    }
+
+    private void setTableSelection() {
+        tbl_registr.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                getRegister(newValue);
+            }
+        });
+    }
+
+    private void getRegister(RegistrationTm registrationTm) {
+        txtRegisId.setText(registrationTm.getRegistrationID());
+        txtReDate.setPromptText(registrationTm.getDate());
+        cmbStudentId.setValue(registrationTm.getStudentId());
+        cmbProgramId.setValue(registrationTm.getProgramId());
+        txtStudentName.setText(registrationTm.getStudentName());
+        txtProgramName.setText(registrationTm.getProgramName());
+        txtFee.setText(String.valueOf(registrationTm.getFee()));
+        txtPrepayment.setText(String.valueOf(registrationTm.getPrepayment()));
+    }
+
+    private void loadAllRegistrations() {
+
+        ObservableList<RegistrationTm> obList = FXCollections.observableArrayList();
+
+        List<RegistrationDTO> registerList = registrationBO.getAllRegistrations();
+
+        for (RegistrationDTO registrationDTO : registerList) {
+
+            RegistrationTm registrationTm = new RegistrationTm(
+                    registrationDTO.getRegistrationID(),
+                    registrationDTO.getDate(),
+                    registrationDTO.getStudent().getStudentId(),
+                    registrationDTO.getProgram().getProgramId(),
+                    registrationDTO.getStudentName(),
+                    registrationDTO.getProgramName(),
+                    registrationDTO.getFee(),
+                    registrationDTO.getPrepayment()
+            );
+            obList.add(registrationTm);
+        }
+        tbl_registr.setItems(obList);
+
+    }
+
+    private void setCellValueFactory() {
+        colReId.setCellValueFactory(new PropertyValueFactory<>("registrationID"));
+        colPId.setCellValueFactory(new PropertyValueFactory<>("programName"));
+        colSId.setCellValueFactory(new PropertyValueFactory<>("studentName"));
+        colReDate.setCellValueFactory(new PropertyValueFactory<>("reDate"));
+        colFee.setCellValueFactory(new PropertyValueFactory<>("fee"));
+        colPrepayment.setCellValueFactory(new PropertyValueFactory<>("prepayment"));
+    }
+
+    private void getCurrentRegisterId() {
+
+        String currentId = registrationBO.getCurrentReId();
+        String nextId = generateRegisterId(currentId);
+        txtRegisId.setText(nextId);
+
+    }
+
+    private String generateRegisterId(String currentId) {
+        if (currentId != null && currentId.matches("R\\d+")) {
+            int idNum = Integer.parseInt(currentId.substring(1));
+            return "R" + String.format("%03d", ++idNum);
+        }
+        return "R001";
+    }
+
+    private void setDate() {
+    }
+
+    private void gerProgramIds() {
+        List<ProgramDTO> programsList = programBO.getAll();
+
+        for (ProgramDTO programDTO : programsList){
+            cmbProgramId.getItems().add(programDTO.getProgramId());
+        }
+    }
+
+    private void getStudentIds() {
+        List<StudentDTO> studentsList = studentBO.getAllStudent();
+
+        for (StudentDTO studentDTO : studentsList){
+            cmbStudentId.getItems().add(studentDTO.getStudentId());
+        }
+    }
+
 
     @FXML
-    private TextField txtStudentId;
+    void btnClearOnAction(ActionEvent event) {
+        clearTextFields();
+    }
+
+    private void clearTextFields() {
+        txtRegisId.setText("");
+        txtReDate.setPromptText("");
+        cmbStudentId.setValue("");
+        cmbProgramId.setValue("");
+        txtStudentName.setText("");
+        txtProgramName.setText("");
+        txtFee.setText("");
+        txtPrepayment.setText("");
+        getCurrentRegisterId();
+    }
 
     @FXML
-    private TextField txtStudentName;
+    void btnDeleteOnAction(ActionEvent event) {
+        String registerId = txtRegisId.getText();
 
-    @FXML
-    void btnPaymentOnAction(ActionEvent event) {
+        try {
+            boolean isDeleted = registrationBO.delete(registerId);
+            if (isDeleted){
+                new Alert(Alert.AlertType.CONFIRMATION,"Registration deleted!").show();
+                loadAllRegistrations();
+                clearTextFields();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 
     @FXML
-    void btnRegisterOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) {
+        String registerId = txtRegisId.getText();
+        String date = String.valueOf(Date.valueOf(LocalDate.now()));
+        String studentId = cmbStudentId.getValue();
+        String programId = cmbProgramId.getValue();
+        String studentName = txtStudentName.getText();
+        String programName = txtProgramName.getText();
+        double programFee = Double.parseDouble(txtFee.getText());
+        double prepayment = Double.parseDouble(txtPrepayment.getText());
 
+        StudentDTO studentDTO = studentBO.searchById(studentId);
+
+        Student student = new Student();
+        student.setStudentId(studentId);
+        student.setUser(studentDTO.getUser());
+        student.setName(studentDTO.getName());
+        student.setAddress(studentDTO.getAddress());
+        student.setEmail(studentDTO.getEmail());
+        student.setContact(studentDTO.getContact());
+
+        ProgramDTO programDTO = programBO.searchById(programId);
+
+        Program program = new Program();
+
+        program.setProgramId(programId);
+        program.setProgramName(programDTO.getProgramName());
+        program.setDuration(programDTO.getDuration());
+        program.setFee(programDTO.getFee());
+
+        boolean isSaved = registrationBO.save(new RegistrationDTO(registerId,date,student,program,studentName,programName,programFee,prepayment));
+
+        if (isSaved){
+            new Alert(Alert.AlertType.CONFIRMATION,"Registration completed!").show();
+            loadAllRegistrations();
+        }
+        else {
+            new Alert(Alert.AlertType.ERROR,"Registration not completed!").show();
+        }
     }
 
     @FXML
-    void btnViewRegisOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) {
+        String registerId = txtRegisId.getText();
+        String date = String.valueOf(Date.valueOf(LocalDate.now()));
+        String studentId = cmbStudentId.getValue();
+        String programId = cmbProgramId.getValue();
+        String studentName = txtStudentName.getText();
+        String programName = txtProgramName.getText();
+        double programFee = Double.parseDouble(txtFee.getText());
+        double prepayment = Double.parseDouble(txtPrepayment.getText());
+
+        StudentDTO studentDTO = studentBO.searchById(studentId);
+
+        Student student = new Student();
+        student.setStudentId(studentId);
+        student.setUser(studentDTO.getUser());
+        student.setName(studentDTO.getName());
+        student.setAddress(studentDTO.getAddress());
+        student.setEmail(studentDTO.getEmail());
+        student.setContact(studentDTO.getContact());
+
+        ProgramDTO programDTO = programBO.searchById(programId);
+
+        Program program = new Program();
+
+        program.setProgramId(programId);
+        program.setProgramName(programDTO.getProgramName());
+        program.setDuration(programDTO.getDuration());
+        program.setFee(programDTO.getFee());
+
+        boolean isUpdated = registrationBO.update(new RegistrationDTO(registerId,date,student,program,studentName,programName,programFee,prepayment));
+
+        if (isUpdated){
+            new Alert(Alert.AlertType.CONFIRMATION,"Registration updated!").show();
+            loadAllRegistrations();
+        }
+        else {
+            new Alert(Alert.AlertType.ERROR,"Registration not updated!").show();
+        }
 
     }
 
-    @FXML
-    void cmbProgramNamesOnAction(ActionEvent event) {
+    public void cmbProgramIdOnAction(ActionEvent actionEvent) {
+        String programId = cmbProgramId.getValue();
 
+        ProgramDTO programDTO = registrationBO.searchProgram(programId);
+
+        if(programDTO != null){
+            txtProgramName.setText(programDTO.getProgramName());
+            txtFee.setText(String.valueOf(programDTO.getFee()));
+        }
+        txtPrepayment.requestFocus();
     }
 
-    @FXML
-    void getDateOnAction(ActionEvent event) {
+    public void cmbStudentOnAction(ActionEvent actionEvent) {
+        String studentId = cmbStudentId.getValue();
 
+        StudentDTO studentDTO = registrationBO.searchStudent(studentId);
+
+        if(studentDTO != null){
+            txtStudentName.setText(studentDTO.getName());
+        }
     }
-
-    @FXML
-    void txtPaymentOnKeyReleased(KeyEvent event) {
-
-    }
-
-    @FXML
-    void txtStudentIdOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void txtStudentIdOnKeyReleased(KeyEvent event) {
-
-    }
-
 }

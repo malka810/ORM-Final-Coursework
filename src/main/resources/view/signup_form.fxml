@@ -7,77 +7,84 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="628.0" prefWidth="941.0" styleClass="root-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SignUpFormController">
+<AnchorPane fx:id="rootNode" prefHeight="643.0" prefWidth="840.0" styleClass="root-pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.SignUpFormController">
     <children>
-        <AnchorPane layoutX="452.0" layoutY="12.0" prefHeight="591.0" prefWidth="440.0" style="-fx-border-color: white;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="25.0" AnchorPane.topAnchor="12.0">
+        <AnchorPane layoutX="438.0" layoutY="0.8" prefHeight="644.0" prefWidth="423.0" style="-fx-border-color: white;" stylesheets="@../css/style.css" AnchorPane.bottomAnchor="-1.0" AnchorPane.topAnchor="1.0">
             <children>
-                <Label layoutX="13.0" layoutY="67.0" prefHeight="34.0" prefWidth="105.0" text="User Name:">
+                <Label layoutX="68.0" layoutY="85.0" prefHeight="34.0" prefWidth="90.0" text="User Name:">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtUserName" layoutX="122.0" layoutY="67.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="34.0" prefWidth="278.0" style="-fx-border-radius: 20;" />
-                <Label layoutX="12.0" layoutY="235.0" prefHeight="34.0" prefWidth="106.0" text="Email:">
+                <TextField fx:id="txtUserName" layoutX="65.0" layoutY="120.0" onKeyReleased="#txtNameOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" style="-fx-border-radius: 20;" />
+                <Label layoutX="71.0" layoutY="295.0" prefHeight="26.0" prefWidth="72.0" text="Email:">
                     <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="131.0" layoutY="470.0" mnemonicParsing="false" onAction="#btnSignupOnAction" prefHeight="47.0" prefWidth="173.0" styleClass="login-button" stylesheets="@../css/style.css" text="Sign Up" textFill="WHITE">
+                <Button layoutX="143.0" layoutY="528.0" mnemonicParsing="false" onAction="#btnSignupOnAction" prefHeight="41.0" prefWidth="131.0" styleClass="login-button" stylesheets="@../css/style.css" text="Sign Up" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Button>
-                <PasswordField fx:id="txtPassword" layoutX="125.0" layoutY="119.0" onKeyReleased="#txtPassOnKeyReleased" prefHeight="34.0" prefWidth="271.0" />
-                <Label layoutX="12.0" layoutY="119.0" prefHeight="34.0" prefWidth="106.0" text="Password:">
+                <PasswordField fx:id="txtPassword" layoutX="65.0" layoutY="190.0" onKeyReleased="#txtPassOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" />
+                <Label layoutX="68.0" layoutY="155.0" prefHeight="34.0" prefWidth="90.0" text="Password:">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="txtRePassword" layoutX="65.0" layoutY="260.0" onKeyReleased="#txtRePassOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" />
+                <Label layoutX="64.0" layoutY="225.0" prefHeight="34.0" prefWidth="148.0" text="Re-Enter Password:">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font>
+                </Label>
+                <Label layoutX="98.0" layoutY="576.0" prefHeight="34.0" prefWidth="166.0" text="Already have an account?">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Hyperlink layoutX="257.0" layoutY="580.0" onAction="#linkLoginOnAction" text="Login " textFill="#073019">
                     <font>
                         <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <PasswordField fx:id="txtRePassword" layoutX="144.0" layoutY="169.0" onKeyReleased="#txtRePassOnKeyReleased" prefHeight="34.0" prefWidth="278.0" />
-                <Label layoutX="12.0" layoutY="176.0" prefHeight="34.0" prefWidth="134.0" text="Re-Enter Password:">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="26.0" layoutY="518.0" prefHeight="34.0" prefWidth="221.0" text="Already have an account?">
-                    <font>
-                        <Font name="System Bold" size="15.0" />
-                    </font>
-                </Label>
-                <Hyperlink layoutX="212.0" layoutY="523.0" onAction="#linkLoginOnAction" styleClass="forgot-link" text="Login form">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
                     </font>
                 </Hyperlink>
-                <ComboBox fx:id="cmbAdminCoordinator" layoutX="144.0" layoutY="341.0" prefHeight="34.0" prefWidth="278.0" stylesheets="@../css/style.css" />
-                <TextField fx:id="txtEmail" layoutX="144.0" layoutY="225.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="278.0" style="-fx-border-radius: 20;" />
-            <Label layoutX="20.0" layoutY="341.0" prefHeight="34.0" prefWidth="90.0" text="Role :">
+                <ComboBox fx:id="cmbAdminCoordinator" layoutX="68.0" layoutY="471.0" opacity="0.17" prefHeight="34.0" prefWidth="288.0" stylesheets="@../css/style.css" />
+                <TextField fx:id="txtEmail" layoutX="65.0" layoutY="322.0" onKeyReleased="#txtEmailOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" style="-fx-border-radius: 20;" />
+            <Label layoutX="68.0" layoutY="444.0" prefHeight="26.0" prefWidth="78.0" text="Role :">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtUserID" layoutX="122.0" layoutY="14.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="34.0" prefWidth="278.0" style="-fx-border-radius: 20;" />
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="34.0" prefWidth="78.0" text="User ID:">
+            <TextField fx:id="txtUserID" layoutX="69.0" layoutY="50.0" onKeyReleased="#txtNameOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" style="-fx-border-radius: 20;" />
+            <Label layoutX="64.0" layoutY="367.0" prefHeight="26.0" prefWidth="122.0" text="Phone number:">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label layoutX="12.0" layoutY="287.0" prefHeight="34.0" prefWidth="106.0" text="Phone number:">
+            <TextField fx:id="txtTel" layoutX="65.0" layoutY="394.0" onKeyReleased="#txtEmailOnKeyReleased" opacity="0.17" prefHeight="34.0" prefWidth="288.0" style="-fx-border-radius: 20;" />
+            <Label layoutX="68.0" layoutY="15.0" prefHeight="34.0" prefWidth="78.0" text="User ID:">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="txtTel" layoutX="144.0" layoutY="287.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="278.0" style="-fx-border-radius: 20;" />
             </children>
             <styleClass>
                 <String fx:value="transparent" />
                 <String fx:value="radius" />
             </styleClass>
         </AnchorPane>
-          <Label layoutX="155.0" layoutY="25.0" prefHeight="58.0" prefWidth="173.0" text="SIGNUP" textFill="WHITE">
+      <ImageView fitHeight="643.0" fitWidth="456.0" layoutX="-2.0" layoutY="1.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/sign.jpeg" />
+         </image>
+      </ImageView>
+          <Label layoutX="139.0" layoutY="48.0" prefHeight="58.0" prefWidth="173.0" text="SIGNUP" textFill="WHITE">
               <font>
                   <Font name="System Bold" size="40.0" />
               </font>

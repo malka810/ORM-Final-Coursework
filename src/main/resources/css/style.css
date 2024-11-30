@@ -15,9 +15,9 @@
 }
 
 .login-title {
-    -fx-font-size: 30px;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-text-fill: #f3faf8;
+    -fx-text-fill: white;
 
 }
 
@@ -42,4 +42,35 @@
     -fx-text-fill: #0c8355;
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+}
+
+.Anchorpane{
+    -fx-background-color: linear-gradient(to right, #e1f3ec, #74caa7);
+    -fx-border-color: green;
+}
+
+.imageview{
+    -fx-border-radius: 10px;
+}
+
+.pane{
+    -fx-background-color: linear-gradient(to right, #2c8763, #095737);
+}
+
+.sidepanel{
+    -fx-background-color: linear-gradient(to right, #16593f, #0a1c15);
+}
+
+.btn{
+    -fx-background-color: #e4f4ee;
+    -fx-background-radius: 10px ;
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+    -fx-border-radius: 10px;
+
+}
+.log-Out{
+
+    -fx-background-color: #3f9370;
+    -fx-background-radius: 10px ;
 }

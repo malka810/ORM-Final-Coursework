@@ -1,19 +1,17 @@
 package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
-import lk.ijse.dao.custom.RegistrationDAO;
-import lk.ijse.entity.Program;
-import lk.ijse.entity.Registration;
+import lk.ijse.dao.custom.PaymentDAO;
+import lk.ijse.entity.Payment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class RegistrationDAOImpl implements RegistrationDAO {
-
+public class PaymentDAOImpl implements PaymentDAO {
     @Override
-    public boolean save(Registration object) {
+    public boolean save(Payment object) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         Object isSaved = session.save(object);
@@ -31,17 +29,20 @@ public class RegistrationDAOImpl implements RegistrationDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Registration registration = session.get(Registration.class,object);
-        session.delete(registration);
-        transaction.commit();
+        Query query = session.createQuery("delete from Payment where payment_id = ?1");
+        query.setParameter(1, object);
+        boolean isDeleted = query.executeUpdate() > 0;
 
-        session.close();
-        return true;
-
+        if (isDeleted) {
+            transaction.commit();
+            session.close();
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public boolean update(Registration object) {
+    public boolean update(Payment object) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -51,13 +52,12 @@ public class RegistrationDAOImpl implements RegistrationDAO {
         return true;
     }
 
-
     @Override
     public String getCurrentID() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("select registrationID from Registration ORDER BY registrationID DESC LIMIT 1");
+        Query query = session.createQuery("select payment_id from Payment ORDER BY payment_id DESC LIMIT 1");
         String currentId = (String) query.uniqueResult();
 
         transaction.commit();
@@ -66,26 +66,14 @@ public class RegistrationDAOImpl implements RegistrationDAO {
     }
 
     @Override
-    public List<Registration> getAll() {
+    public List<Payment> getAll() {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("from Registration ");
-        List<Registration> registrations = query.list();
+        Query query = session.createQuery("from Payment");
+        List<Payment> payments = query.list();
         transaction.commit();
         session.close();
-        return registrations;
-    }
-
-    @Override
-    public Registration search(String registerId) {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-        Query query = session.createQuery("from Registration where registrationID =?1");
-        query.setParameter(1, registerId);
-        Registration registration = (Registration) query.uniqueResult();
-        transaction.commit();
-        return registration;
+        return payments;
     }
 }

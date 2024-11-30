@@ -31,7 +31,7 @@ public class UserBOImpl implements UserBO {
 
     @Override
     public boolean save(UserDTO userDTO) {
-       return userDAO.save(new User(userDTO.getUserId(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getTel(), userDTO.getRole()));
+       return userDAO.save(new User(userDTO.getUser_Id(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getTel(), userDTO.getRole()));
     }
 
     @Override
@@ -52,5 +52,27 @@ public class UserBOImpl implements UserBO {
     @Override
     public boolean checkCredentials(String username, String password) {
         return userDAO.checkCredentials(username,  password);
+    }
+
+    @Override
+    public boolean update(UserDTO userDTO) {
+        return userDAO.update(new User(userDTO.getUser_Id(), userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(), userDTO.getTel(), userDTO.getRole()));
+    }
+
+    @Override
+    public boolean delete(String userId) {
+        try {
+            // Call the DAO to perform the delete operation
+            return userDAO.delete(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public UserDTO searchByID(String userId) {
+        User user = userDAO.searchUserId(userId);
+        return new UserDTO(user.getUserId(),user.getRole(),user.getUsername(),user.getPassword(),user.getEmail(),user.getTel());
     }
 }

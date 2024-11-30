@@ -1,9 +1,7 @@
 package lk.ijse.dao;
 
-import lk.ijse.dao.custom.impl.ProgramDAOImpl;
-import lk.ijse.dao.custom.impl.RegistrationDAOImpl;
-import lk.ijse.dao.custom.impl.StudentDAOImpl;
-import lk.ijse.dao.custom.impl.UserDAOImpl;
+import lk.ijse.bo.custom.impl.ProgramBOImpl;
+import lk.ijse.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -21,22 +19,18 @@ public class DAOFactory {
     public SuperDAO getDAO(DAOTypes daoTypes){
         switch (daoTypes){
             case Student:
-
+              return new StudentDAOImpl();
             case Programs:
-
+                return new ProgramDAOImpl();
 
             case Payment:
-
+                 return new PaymentDAOImpl();
 
             case Registration:
-
+             return new RegistrationDAOImpl();
 
             case Users:
                 return new UserDAOImpl();
-
-            case Query:
-
-
 
 
             default:

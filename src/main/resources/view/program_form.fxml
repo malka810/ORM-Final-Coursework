@@ -1,14 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.QuadCurve?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="view.ProgramForm"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="Proot" prefHeight="675.0" prefWidth="780.0" styleClass="pane" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.ProgramFormController">
+    <children>
+        <Text layoutX="83.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <font>
+                <Font name="System Bold" size="35.0" />
+            </font>
+            <fill>
+                <LinearGradient endX="1.0" endY="1.0" startX="0.2395833333333334">
+                    <stops>
+                        <Stop>
+                            <color>
+                                <Color red="0.24210526049137115" green="0.19368420541286469" blue="0.19368420541286469" />
+                            </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                            <color>
+                                <Color red="1.0" green="1.0" blue="1.0" />
+                            </color>
+                        </Stop>
+                    </stops>
+                </LinearGradient>
+            </fill>
+        </Text>
+        <TableView fx:id="tblProgram" layoutX="15.0" layoutY="473.0" prefHeight="176.0" prefWidth="749.0" style="-fx-border-radius: 15;">
+            <columns>
+                <TableColumn fx:id="colPId" prefWidth="212.0000057220459" text="Program ID" />
+                <TableColumn fx:id="colProName" prefWidth="232.79998779296875" text="Program name" />
+                <TableColumn fx:id="colDuration" prefWidth="155.99996948242188" text="Duration" />
+                <TableColumn fx:id="colFee" prefWidth="147.19997558593752" text="Course Fee" />
+            </columns>
+        </TableView>
+        <Button layoutX="84.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="104.0" text="Save" textFill="#1e1d1d">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="215.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="104.0" text="Update">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="355.0" layoutY="413.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="84.0" text="Delete">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="501.0" layoutY="412.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="42.0" prefWidth="77.0" text="Clear">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Text layoutX="309.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program" wrappingWidth="225.814453125">
+            <font>
+                <Font name="System Bold" size="48.0" />
+            </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startX="0.8115530086286141">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.11157894879579544" green="0.5684210658073425" blue="0.37045612931251526" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+        </Text>
+      <QuadCurve controlX="-67.0" controlY="-196.60000610351562" endX="361.79998779296875" endY="-179.0" layoutX="172.0" layoutY="179.0" opacity="0.27" startX="-172.0" startY="96.19998168945312" stroke="#156931" strokeType="INSIDE">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.26467835903167725" green="0.7684210538864136" blue="0.533341109752655" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </QuadCurve>
+          <Text layoutX="94.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID :">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <TextField fx:id="txtProID" layoutX="91.0" layoutY="219.0" prefHeight="32.0" prefWidth="253.0" promptText="program id :">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+          <Text layoutX="412.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program Name:">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <TextField fx:id="txtPName" layoutX="413.0" layoutY="219.0" prefHeight="32.0" prefWidth="254.0" promptText="Program Name :">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+          <TextField fx:id="txtProFee" layoutX="412.0" layoutY="338.0" prefHeight="32.0" prefWidth="254.0" promptText="course fee :">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+          <Text layoutX="413.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fee (LKR):">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <Text layoutX="95.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:">
+              <font>
+                  <Font name="System Bold" size="14.0" />
+              </font>
+          </Text>
+          <TextField fx:id="txtDuration" layoutX="91.0" layoutY="338.0" prefHeight="32.0" prefWidth="254.0" promptText="Duration">
+              <font>
+                  <Font size="14.0" />
+              </font>
+          </TextField>
+    </children>
 </AnchorPane>

@@ -19,4 +19,10 @@ public interface UserBO extends SuperBO {
     String getUserRole(String username);
 
     boolean checkCredentials(String username, String password);
+
+    boolean update(UserDTO userDTO);
+
+    boolean delete(String userId);
+
+    UserDTO searchByID(String userId);
 }

@@ -1,53 +1,31 @@
 package lk.ijse.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.UUID;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
-@Table(name = "registrations")
 public class Registration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID registrationId; // Use UUID for unique identifier
+    private String registrationID;
+    private String date;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student; // Many-to-One relationship with Student
+    @JoinColumn(name = "studentId")
+    private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "program_id", nullable = false)
-    private Program program; // Many-to-One relationship with Program
+    @JoinColumn(name = "programId")
+    private Program program;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "registration_date", nullable = false)
-    private Date registrationDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private Status status; // Enum for registration status
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_id", unique = true)
-    private Payment payment; // One-to-One relationship with Payment
-
-    @ManyToOne
-    @JoinColumn(name = "admissions_coordinator_id", nullable = false)
-    private User admissionsCoordinator; // Many-to-One relationship with User
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", updatable = false)
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at")
-    private Date updatedAt;
-
-    // Enum for registration status
-    public enum Status {
-        PENDING, COMPLETED, CANCELLED
-    }
-
+    private String studentName;
+    private String programName;
+    private double fee;
+    private double prepayment;
 }

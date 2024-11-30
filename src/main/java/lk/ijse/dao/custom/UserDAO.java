@@ -15,4 +15,10 @@ public interface UserDAO extends CrudDAO {
     String getUserRole(String username);
 
     boolean checkCredentials(String username, String password);
+
+    boolean update(User user);
+
+    boolean delete(String userId);
+
+    User searchUserId(String userId);
 }
